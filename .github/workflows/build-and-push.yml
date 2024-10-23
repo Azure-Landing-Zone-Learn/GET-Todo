@@ -39,3 +39,34 @@ jobs:
       - name: List Docker images in ACR
         run: |
           az acr repository show-tags --name $ACR_NAME --repository $IMAGE_NAME
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: ssh to the vm
+        uses: appleboy/ssh-action@master
+        with:
+          host: 10.1.0.4
+          admin_user: tung
+          admin_password: uP0RHRRmA-EbDe1Dk2bhN4kH4CZ6cU
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            # Update package list and install Docker if not installed
+            if ! command -v docker &> /dev/null; then
+              echo "Docker not found, installing..."
+              sudo apt-get update
+              sudo apt-get install -y docker.io
+              sudo systemctl start docker
+              sudo systemctl enable docker
+            else
+              echo "Docker is already installed."
+            fi
