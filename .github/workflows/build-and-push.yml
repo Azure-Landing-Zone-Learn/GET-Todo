@@ -7,7 +7,7 @@ on:
 
 env:
   ACR_NAME: acrdmsnortheurope
-  IMAGE_NAME: your-image-name 
+  IMAGE_NAME: test-image-name
   ACR_LOGIN_SERVER: ${{ secrets.ACR_LOGIN_SERVER }}
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
