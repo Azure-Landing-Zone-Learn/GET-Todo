@@ -58,7 +58,7 @@ jobs:
         with:
           host: 13.74.128.42                     # Your VM's IP address
           username: tung                      # Your VM's username
-          ssh_key: ${{ secrets.ACR_SSH_KEY }}  # Your SSH key for authentication
+          ssh_key: ${{ secrets.VM_SSH_KEY }}  # Your SSH key for authentication
           script: |
             # Update package list and install Docker if not installed
             if ! command -v docker &> /dev/null; then
