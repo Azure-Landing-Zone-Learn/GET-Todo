@@ -53,16 +53,16 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: SSH to the VM
-        uses: appleboy/ssh-action@v0.1.9
-        with:
-          host: 13.74.128.42   
-          username: tung                     
-          key: ${{ secrets.VM_SSH_KEY }} 
-          timeout: 120s
-          command_timeout: 30m
-          script: |
-            echo "SSH Connection Established."
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 13.69.213.122 >> ~/.ssh/known_hosts
+
+      - name: SSH to the VM and Deploy
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no tung@13.69.213.122 << 'EOF'
             # Update package list and install Docker if not installed
             if ! command -v docker &> /dev/null; then
               echo "Docker not found, installing..."
@@ -75,9 +75,9 @@ jobs:
             fi
 
             # Log in to ACR (ensure you have the Azure CLI installed)
-            echo "${{ secrets.AZURE_CREDENTIALS }}" | az acr login --name ${{ env.ACR_NAME }}
+            echo "${{ secrets.AZURE_CREDENTIALS }}" | az acr login --name publicacrdmsnortheurope
 
-            # Pull the latest image from ACR
+            # Pull the latest image
             docker pull ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
             # Stop and remove the old container if it exists
@@ -86,3 +86,4 @@ jobs:
             
             # Run the new container
             docker run -d --name your_container_name -p 80:80 ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          EOF
