@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const APP_PORT = process.env.APP_PORT || 3000;
 
 let todos = [
   { id: 1, task: "Buy groceries", completed: false },
@@ -14,6 +14,6 @@ app.get('/todos', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(APP_PORT, () => {
+  console.log(`Server running on http://localhost:${APP_PORT}`);
 });
