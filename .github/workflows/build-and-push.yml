@@ -1,12 +1,12 @@
-name: SSH Connection Test
+name: SSH to VM and Install Docker
 
 on:
   push:
     branches:
-      - main  # Change to your desired branch
+      - main  # Change this to your desired branch
 
 jobs:
-  ssh-connection:
+  install-docker:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,19 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 13.69.213.122 >> ~/.ssh/known_hosts
 
-      - name: Test SSH connection
+      - name: SSH to VM and Install Docker
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no tung@13.69.213.122 'echo "SSH connection successful!" || echo "SSH connection failed."'
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no tung@13.69.213.122 << 'EOF'
+            echo "Connected to VM successfully!"
+            
+            # Update package list and install Docker if not already installed
+            if ! command -v docker &> /dev/null; then
+              echo "Docker not found, installing..."
+              sudo apt-get update
+              sudo apt-get install -y docker.io
+              sudo systemctl start docker
+              sudo systemctl enable docker
+            else
+              echo "Docker is already installed."
+            fi
+          EOF
