@@ -60,6 +60,7 @@ jobs:
           username: tung                      # Your VM's username
           key: ${{ secrets.VM_SSH_KEY }}  # Your SSH key for authentication
           script: |
+            echo "SSH Connection Established."
             # Update package list and install Docker if not installed
             if ! command -v docker &> /dev/null; then
               echo "Docker not found, installing..."
