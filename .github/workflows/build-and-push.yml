@@ -7,7 +7,7 @@ on:
 
 env:
   ACR_NAME: publicacrdmsnortheurope
-  IMAGE_NAME: test-image-name
+  IMAGE_NAME: GET-todo
   ACR_LOGIN_SERVER: ${{ secrets.ACR_LOGIN_SERVER }}
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -42,7 +42,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-push  # This ensures deploy only runs if build-and-push is successful
+    needs: build-and-push  # Ensure deploy only runs if build-and-push is successful
 
     steps:
       - name: Checkout repository
@@ -56,9 +56,9 @@ jobs:
       - name: SSH to the VM
         uses: appleboy/ssh-action@master
         with:
-          host: 10.1.0.4
-          username: tung
-          key: uP0RHRRmA-EbDe1Dk2bhN4kH4CZ6cU
+          host: 10.1.0.4                     # Your VM's IP address
+          username: tung                      # Your VM's username
+          ssh_key: ${{ secrets.AZURE_SSH_KEY }}  # Your SSH key for authentication
           script: |
             # Update package list and install Docker if not installed
             if ! command -v docker &> /dev/null; then
@@ -71,10 +71,10 @@ jobs:
               echo "Docker is already installed."
             fi
 
-            # Log in to ACR
+            # Log in to ACR (ensure you have the Azure CLI installed)
             echo "${{ secrets.AZURE_CREDENTIALS }}" | az acr login --name ${{ env.ACR_NAME }}
 
-            # Pull the latest image
+            # Pull the latest image from ACR
             docker pull ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
             # Stop and remove the old container if it exists
