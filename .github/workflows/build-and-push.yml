@@ -56,9 +56,10 @@ jobs:
       - name: SSH to the VM
         uses: appleboy/ssh-action@master
         with:
-          host: 13.74.128.42                     # Your VM's IP address
-          username: tung                      # Your VM's username
-          key: ${{ secrets.VM_SSH_KEY }}  # Your SSH key for authentication
+          host: 13.74.128.42   
+          username: tung                     
+          key: ${{ secrets.VM_SSH_KEY }} 
+          port: 22 
           script: |
             echo "SSH Connection Established."
             # Update package list and install Docker if not installed
