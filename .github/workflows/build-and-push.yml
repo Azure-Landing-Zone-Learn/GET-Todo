@@ -60,6 +60,9 @@ jobs:
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no tung@13.69.213.122 << 'EOF'
             echo "Connected to VM successfully!"
             
+            echo "${{ secrets.AZURE_CREDENTIALS }}" > azure_creds.json
+            az login --service-principal -u "${{ secrets.AZURE_CLIENT_ID }}" -p "${{ secrets.AZURE_CLIENT_SECRET }}" --tenant "${{ secrets.AZURE_TENANT_ID }}"
+            
             # Update package list and install Docker if not already installed
             if ! command -v docker &> /dev/null; then
               echo "Docker not found, installing..."
