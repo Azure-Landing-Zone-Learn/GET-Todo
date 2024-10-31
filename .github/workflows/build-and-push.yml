@@ -86,7 +86,7 @@ jobs:
             az login --service-principal -u "${{ secrets.AZURE_CLIENT_ID }}" -p "${{ secrets.AZURE_CLIENT_SECRET }}" --tenant "${{ secrets.AZURE_TENANT_ID }}"
 
             # Pull the Docker image from ACR
-            az acr login --name ${{ env.ACR_NAME }}
+            sudo az acr login --name ${{ env.ACR_NAME }}
             docker pull ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
             
             # Stop any existing container and run a new one
