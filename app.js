@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const APP_PORT = process.env.APP_PORT || 3000;
+const APP_PORT = process.env.APP_PORT || 80;
 
 let todos = [
   { id: 1, task: "Buy groceries", completed: false },
@@ -8,7 +8,7 @@ let todos = [
   { id: 3, task: "Finish homework", completed: false }
 ];
 
-app.get('/todos', (req, res) => {
+app.get('/api1/todos', (req, res) => {
   res.status(200).json({
     data: todos
   });
