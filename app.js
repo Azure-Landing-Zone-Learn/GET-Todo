@@ -14,6 +14,7 @@ app.get('/todoapi/todos', (req, res) => {
   });
 });
 
+// Start the server
 app.listen(APP_PORT, () => {
   console.log(`Server running on http://localhost:${APP_PORT}`);
 });
