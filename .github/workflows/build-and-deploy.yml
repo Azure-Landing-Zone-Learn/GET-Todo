@@ -15,6 +15,7 @@ jobs:
     secrets: inherit
   
   trigger-install-and-deploy:
+    needs: trigger-build-and-push
     uses: Azure-Landing-Zone-Learn/cicd-workflows/.github/workflows/install-and-deploy.yml@main
     with:
       ACR_NAME: publicacrdmsnortheurope
