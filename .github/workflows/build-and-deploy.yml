@@ -20,4 +20,6 @@ jobs:
       ACR_NAME: publicacrdmsnortheurope
       IMAGE_NAME: gettodo
       ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
+      GITHUB_SHA: ${{ github.sha }}
+      UBUNTU_VERSION: 20.04
     secrets: inherit
