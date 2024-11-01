@@ -15,4 +15,4 @@ jobs:
       ACR_NAME: publicacrdmsnortheurope
       IMAGE_NAME: gettodo
       ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
-      AZURE_CREDENTIALS: AZURE_CREDENTIALS
+      AZURE_CREDENTIALS: env.AZURE_CREDENTIALS
