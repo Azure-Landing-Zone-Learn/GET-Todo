@@ -13,3 +13,11 @@ jobs:
       IMAGE_NAME: gettodo
       ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
     secrets: inherit
+  
+  trigger-install-and-deploy:
+    uses: Azure-Landing-Zone-Learn/cicd-workflows/.github/workflows/install-and-deploy.yml@main
+    with:
+      ACR_NAME: publicacrdmsnortheurope
+      IMAGE_NAME: gettodo
+      ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
+    secrets: inherit
