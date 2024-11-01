@@ -11,5 +11,7 @@ jobs:
     with:
       ACR_NAME: publicacrdmsnortheurope
       IMAGE_NAME: gettodo
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-      AZURE_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
+      ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
+
+    secrets: 
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }} 
