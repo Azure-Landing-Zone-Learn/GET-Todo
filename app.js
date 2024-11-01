@@ -8,7 +8,7 @@ let todos = [
   { id: 3, task: "Finish homework", completed: false }
 ];
 
-app.get('/api1/todos', (req, res) => {
+app.get('/todoapi/todos', (req, res) => {
   res.status(200).json({
     data: todos
   });
