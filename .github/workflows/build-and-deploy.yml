@@ -14,13 +14,3 @@ jobs:
       ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
     secrets: inherit
   
-  trigger-install-and-deploy:
-    needs: trigger-build-and-push
-    uses: Azure-Landing-Zone-Learn/cicd-workflows/.github/workflows/install-and-deploy.yml@main
-    with:
-      ACR_NAME: publicacrdmsnortheurope
-      IMAGE_NAME: gettodo
-      ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
-      GITHUB_SHA: ${{ github.sha }}
-      UBUNTU_VERSION: 20.04
-    secrets: inherit
