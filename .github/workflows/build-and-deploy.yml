@@ -21,5 +21,4 @@ jobs:
       ACR_NAME: publicacrdmsnortheurope
       IMAGE_NAME: gettodo
       ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
-      FILE_PATH: Azure-Landing-Zone-Learn/cicd-workflows/deploy-acr-image.sh
     secrets: inherit
