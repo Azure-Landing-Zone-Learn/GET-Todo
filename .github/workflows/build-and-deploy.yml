@@ -13,4 +13,3 @@ jobs:
       IMAGE_NAME: gettodo
       ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
     secrets: inherit
-  
