@@ -7,7 +7,7 @@ on:
 
 jobs:
   trigger-build-and-push:
-    uses: Azure-Landing-Zone-Learn/cicd-workflows/.github/workflows/build-and-push.yml
+    uses: Azure-Landing-Zone-Learn/cicd-workflows/.github/workflows/build-and-push.yml@main
     with:
       ACR_NAME: publicacrdmsnortheurope
       IMAGE_NAME: gettodo
