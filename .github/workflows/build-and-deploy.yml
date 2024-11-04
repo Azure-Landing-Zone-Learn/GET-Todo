@@ -22,4 +22,5 @@ jobs:
       IMAGE_NAME: gettodo
       ACR_LOGIN_SERVER: publicacrdmsnortheurope.azurecr.io
       GITHUB_SHA: ${{ github.sha }}
+      VM_NAME: vm-be-get-dms-northeurope
     secrets: inherit

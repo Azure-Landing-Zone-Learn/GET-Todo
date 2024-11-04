@@ -7,7 +7,9 @@ app.get('/todoapi/todos', (req, res) => {
     data: [
       { id: 1, task: "Buy groceries", completed: false },
       { id: 2, task: "Clean the house", completed: true },
-      { id: 3, task: "Finish homework", completed: false }
+      { id: 3, task: "Finish homework", completed: false },
+      { id: 4, task: "Go to the gym", completed: false },
+      { id: 5, task: "Read a book", completed: true }
     ]
   });
 });
